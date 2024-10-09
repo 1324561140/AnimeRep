@@ -201,7 +201,7 @@ table { border-collapse: collapse; }
 }
 .item-title_content::before{
     position: absolute;
-    content: url('https://img.awsapp.cn/images/20240926/0704e7d800c8319de544464f366a522d.svg');
+    content: url('/0704e7d800c8319de544464f366a522d.svg');
     width: 17px;
     height: 17px;
     left: 0;
@@ -209,7 +209,7 @@ table { border-collapse: collapse; }
 }
 .item-title_content::after{
     position: absolute;
-    content: url('https://img.awsapp.cn/images/20240926/678afe4fa0485065a5251dd1a2d08c80.svg');
+    content: url('/678afe4fa0485065a5251dd1a2d08c80.svg');
     width: 17px;
     height: 17px;
     top: -7px;
@@ -241,7 +241,7 @@ table { border-collapse: collapse; }
     position: relative;
 }
 .zero-box_tab_left::before, .two-box_tab_left::before{
-    content: url('https://img.awsapp.cn/images/20240926/e3694262a00b3dba05e0d8ce67d2e568.svg');
+    content: url('/e3694262a00b3dba05e0d8ce67d2e568.svg');
     width: 8px;
     height: 8px;
     position: absolute;
