@@ -15,15 +15,43 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            padding: 30px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .background-text {
+            color: rgba(196, 18, 48, 0.2); /* 调整透明度，使文字更显眼 */
+            font-size: 40px;
+            line-height: 1.8;
+            text-align: left;
+            white-space: pre-wrap;
+            word-break: break-all;
+            user-select: none;
+        }
+
         .container {
             text-align: center;
             padding: 30px;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 12px;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             width: 90%;
+            margin: 20px;
+            position: relative;
+            z-index: 1;
         }
         h1 {
             color: #c41230;
@@ -88,6 +116,8 @@
     </style>
 </head>
 <body>
+    <div class="background-wrapper" id="backgroundWrapper">
+    </div>
     <div class="container">
         <h1>资源访问确认</h1>
         <div class="core-values">
@@ -108,11 +138,13 @@
         <p class="notice">系统正在进行安全验证，即将为您跳转到目标页面...</p>
         <a href="https://p3-ppx.byteimg.com/obj/ez-data/17308145723668a5292bb99" class="btn">立即跳转</a>
         <div class="footer">
-            <p>跳转域名：p3-ppx.byteimg.com</p>
-            <p><a href="https://beian.miit.gov.cn/" target="_blank">京ICP备12025439号-26</a></p>
+            <p>目标跳转域名：p3-ppx.byteimg.com</p>
+            <p><a href="https://beian.miit.gov.cn/" target="_blank">目标网站备案号：京ICP备12025439号-26</a></p>
+            <p>本域名在中国大陆禁止备案，故跳转到已备案的com域名上</p>
         </div>
     </div>
     <script>
+        // 倒计时脚本
         let seconds = 5;
         const btnElement = document.querySelector('.btn');
         const interval = setInterval(() => {
@@ -122,6 +154,51 @@
                 clearInterval(interval);
             }
         }, 1000);
+
+        // 生成背景文字
+        const text = `我们生在红旗下，
+长在春风里，
+人民有信仰，
+国家有力量，
+民族有希望。
+目光所至皆为华夏，
+五星闪耀皆为信仰！
+愿以吾辈之青春，
+捍卫盛世之中华！
+我们作为时代的青年，
+是祖国未来的建设者，
+我们肩负重任，
+任重而道远。`;
+
+        function fillBackground() {
+            const wrapper = document.getElementById('backgroundWrapper');
+            wrapper.innerHTML = ''; // 清空现有内容
+            
+            // 计算需要多少组文字才能填满屏幕
+            const screenHeight = window.innerHeight;
+            const screenWidth = window.innerWidth;
+            const textHeight = 40 * 1.8 * 13; // 字体大小 * 行高 * 行数
+            const textWidth = 40 * 20; // 估算每行宽度
+            
+            const columnsNeeded = Math.ceil(screenWidth / textWidth);
+            const rowsNeeded = Math.ceil(screenHeight / textHeight);
+            
+            for(let i = 0; i < rowsNeeded * columnsNeeded; i++) {
+                const div = document.createElement('div');
+                div.className = 'background-text';
+                div.style.position = 'absolute';
+                div.style.left = `${(i % columnsNeeded) * textWidth}px`;
+                div.style.top = `${Math.floor(i / columnsNeeded) * textHeight}px`;
+                div.textContent = text;
+                wrapper.appendChild(div);
+            }
+        }
+
+        // 初始填充
+        fillBackground();
+
+        // 窗口大小改变时重新填充
+        window.addEventListener('resize', fillBackground);
     </script>
 </body>
 </html>
